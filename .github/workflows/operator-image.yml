@@ -24,18 +24,18 @@ jobs:
       with:
         go-version-file: './go.mod'
 
-    - name: Login to Quay.io
-      id: podman-login-quay
-      run: |
-        podman login --username ${{ secrets.QUAY_ID }} --password ${{ secrets.QUAY_TOKEN }} quay.io
+    #- name: Login to Quay.io
+    #  id: podman-login-quay
+    #  run: |
+    #    podman login --username ${{ secrets.QUAY_ID }} --password ${{ secrets.QUAY_TOKEN }} quay.io
 
     - name: Image Build
       run: |
         make build
-        make image-build -e IMG=quay.io/project-codeflare/codeflare-operator:dev
-        make image-push -e IMG=quay.io/project-codeflare/codeflare-operator:dev
+        #make image-build -e IMG=quay.io/project-codeflare/codeflare-operator:dev
+        #make image-push -e IMG=quay.io/project-codeflare/codeflare-operator:dev
 
-    - name: Logout from Quay.io
-      if: always() && steps.podman-login-quay.outcome == 'success'
-      run: |
-        podman logout quay.io
+    #- name: Logout from Quay.io
+    #  if: always() && steps.podman-login-quay.outcome == 'success'
+    #  run: |
+    #    podman logout quay.io
